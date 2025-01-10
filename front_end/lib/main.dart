@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:les_app/screens/home_screen.dart';
 import 'package:les_app/screens/login_screen.dart';
 import 'package:les_app/theme/theme.dart';
 
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       title: 'LES APP',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: LoginScreen(),
+      home: HomeScreen(),
       builder: EasyLoading.init(),
     );
   }

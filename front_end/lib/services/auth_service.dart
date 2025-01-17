@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:les_app/common/cache_key.dart';
 import 'package:les_app/common/http_helper.dart';
+import 'package:les_app/common/secure_storage_helper.dart';
 import 'package:les_app/model/request_model/login_model.dart';
 import 'package:les_app/model/response_model/base_response_model.dart';
 import 'package:les_app/model/response_model/login_response_model.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthService {
+  final SecureStorageHelper _storage = SecureStorageHelper();
+
   Future<BaseResponseModel<LoginResponseModel?>> handleLogin(
       String email, String password) async {
     var body = LoginModel(email: email, password: password).toJson();
@@ -36,11 +39,11 @@ class AuthService {
   }
 
   Future<void> saveLoginData(LoginResponseModel data) async {
-    final storage = FlutterSecureStorage();
     await Future.wait([
-      storage.write(key: 'accessToken', value: data.accessToken),
-      storage.write(key: 'refreshToken', value: data.refreshToken),
-      storage.write(key: 'userId', value: data.userId),
+      _storage.saveData(CacheKey.accessToken, data.accessToken),
+      _storage.saveData(CacheKey.refreshToken, data.refreshToken),
+      _storage.saveData(CacheKey.userId, data.userId),
+      _storage.saveData(CacheKey.userName, data.userName)
     ]);
   }
 

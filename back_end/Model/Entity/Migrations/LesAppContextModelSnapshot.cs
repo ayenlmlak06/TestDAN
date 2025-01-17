@@ -327,6 +327,9 @@ namespace Entity.Migrations
                     b.Property<Guid>("LessonCategoryId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)");
@@ -379,6 +382,9 @@ namespace Entity.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("LessonCategoryEnum")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)");
@@ -425,6 +431,9 @@ namespace Entity.Migrations
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(4000)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");

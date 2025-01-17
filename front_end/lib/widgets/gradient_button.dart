@@ -29,16 +29,10 @@ class GradientButton extends StatelessWidget {
           end: Alignment.centerRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-              color: gradient.first.withOpacity(0.3),
-              blurRadius: 20,
-              offset: Offset(0, 10))
-        ],
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.orange,
             foregroundColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -58,8 +52,8 @@ class GradientButton extends StatelessWidget {
               : Text(
                   text,
                   style: TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 16,
+                      color: Colors.white,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.5),
                 ),

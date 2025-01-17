@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:les_app/common/http_helper.dart';
 import 'package:les_app/common/toast_helper.dart';
-import 'package:les_app/screens/login_screen.dart';
+import 'package:les_app/screens/auth/login_screen.dart';
 import 'package:les_app/services/auth_service.dart';
 import 'package:les_app/theme/theme.dart';
 import 'package:les_app/widgets/custom_text_filed.dart';
@@ -29,6 +29,7 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _formKey.currentState?.dispose();
     super.dispose();
   }
 
@@ -204,7 +205,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                           TextButton(
                                               onPressed: () {
-                                                Navigator.push(
+                                                Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>

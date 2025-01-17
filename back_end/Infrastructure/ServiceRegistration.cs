@@ -1,7 +1,11 @@
 ﻿using Common.Authorization;
 using Common.UnitOfWork;
 using DomainService.Interfaces.Account;
+using DomainService.Interfaces.File;
+using DomainService.Interfaces.Lesson;
 using Infrastructure.Implements.Account;
+using Infrastructure.Implements.File;
+using Infrastructure.Implements.Lesson;
 using Infrastructure.Implements.PasswordHelper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +32,9 @@ public static class ServiceRegistration
         services.AddTransient<IPasswordHelper, PasswordHelper>();
         services.AddTransient<IAuthService, AuthService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IFileService, FileService>();
+        services.AddTransient<ILessonCategoryService, LessonCategoryService>();
+        services.AddTransient<ILessonService, LessonService>();
 
         return services;
     }

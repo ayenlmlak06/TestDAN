@@ -42,6 +42,8 @@ namespace Entity.Entities.Account
         {
             Email = email;
             UserName = Utils.GetUserNameFromEmail(email);
+            Avatar =
+                "https://itsmestogare.blob.core.windows.net/les-app/avatars/66086975-32e5-4f71-b36b-36787c0aa108.png";
         }
     }
 

@@ -4,13 +4,17 @@ using DomainService.Interfaces.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.RequestModel.Common;
+using Model.RequestModel.User;
 
 namespace API_LES_APP.Controllers.Version1.Account
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class UserController(IHttpContextAccessor httpContextAccessor, IAuthService _authService, IUserService _userService) : BaseController(httpContextAccessor)
+    public class UserController(
+        IHttpContextAccessor httpContextAccessor,
+        IAuthService _authService,
+        IUserService _userService) : BaseController(httpContextAccessor)
     {
 
         [AllowAnonymous]
@@ -99,24 +103,17 @@ namespace API_LES_APP.Controllers.Version1.Account
 
         #region CRUD User
 
-        [HttpGet("get-users")]
-        public async Task<object> GetUsers(string keyword = "", int pageIndex = 1, int pageSize = 50)
-        {
-            var res = await _userService.GetList(currentUserId, username, keyword, pageIndex, pageSize);
-            return Ok(res);
-        }
-
-        [HttpGet("get-detail/{id}")]
-        public async Task<object> GetUserDetail(Guid id)
-        {
-            var res = await _userService.GetDetail(currentUserId, username, id);
-            return Ok(res);
-        }
-
         [HttpGet("get-info-mine")]
         public async Task<object> GetInfoMine()
         {
             var res = await _userService.GetInfoMine(currentUserId, username);
+            return Ok(res);
+        }
+
+        [HttpPut]
+        public async Task<object> Update([FromForm] UserUpdateRequest req)
+        {
+            var res = await _userService.Update(currentUserId, username, req);
             return Ok(res);
         }
 

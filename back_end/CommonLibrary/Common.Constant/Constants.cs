@@ -77,5 +77,15 @@ public static class ContextItemsKey
     public const string UserName = "UserName";
     public const string Email = "Email";
     public const string EnableMicrosoftCheckJwt = "EnableMicrosoftCheckJwt";
-    
+}
+
+public static class UploadFolder
+{
+    public const string Avatar = "avatars";
+    public const string LessonCategory = "lesson_category";
+    public const string Lesson = "lesson";
+    public const string Vocabulary = "vocabulary";
+    public const string Grammar = "grammar";
+    public const string Question = "question";
+    public const string Answer = "answer";
 }

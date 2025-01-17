@@ -33,6 +33,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.Configure<StrJWT>(builder.Configuration.GetSection("StrJWT"));
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+builder.Services.Configure<AzureStorage>(builder.Configuration.GetSection("AzureStorage"));
 var strJwtSettingSection = builder.Configuration.GetSection("StrJWT");
 var strJwtSettings = strJwtSettingSection.Get<StrJWT>();
 var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
@@ -93,7 +94,7 @@ builder.Services.AddAuthorization();
 //config api versioning
 builder.Services.AddApiVersioning(options =>
 {
-    options.DefaultApiVersion = new ApiVersion(2, 0);
+    options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
     options.ApiVersionReader = ApiVersionReader.Combine(

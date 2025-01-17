@@ -10,6 +10,13 @@ namespace Entity.Entities.Lesson
         public string? Note { get; set; }
         public Guid LessonId { get; set; }
         public virtual required Lesson Lesson { get; set; }
+
+        public Grammar()
+        {
+            Id = Guid.NewGuid();
+            CreatedDate = DateTime.Now;
+            IsDeleted = false;
+        }
     }
 
     public class GrammarConfiguration : IEntityTypeConfiguration<Grammar>
@@ -19,7 +26,7 @@ namespace Entity.Entities.Lesson
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Content).HasColumnType("nvarchar(1000)").IsRequired();
             builder.Property(x => x.Note).HasColumnType("nvarchar(1000)");
-            builder.HasOne(x => x.Lesson).WithMany(x => x.Grammars).HasForeignKey(x => x.LessonId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Lesson).WithMany(x => x.Grammars).HasForeignKey(x => x.LessonId);
         }
     }
 }

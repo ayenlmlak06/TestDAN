@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:les_app/common/toast_helper.dart';
-import 'package:les_app/screens/home_screen.dart';
-import 'package:les_app/screens/signup_screen.dart';
+import 'package:les_app/screens/home/home_screen.dart';
+import 'package:les_app/screens/auth/signup_screen.dart';
 import 'package:les_app/services/auth_service.dart';
 import 'package:les_app/theme/theme.dart';
 import 'package:les_app/widgets/custom_text_filed.dart';
@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _formKey.currentState?.dispose();
     super.dispose();
   }
 
@@ -58,8 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       // Save access and refresh token and userId to local storage
       await AuthService().saveLoginData(response.data!);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+          (route) => false);
     } else {
       ToastHelper.showToast(response.message, Colors.white, AppTheme.error);
     }
@@ -89,8 +92,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       // Save access and refresh token and userId to local storage
       await AuthService().saveLoginData(response.data!);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+          (route) => false);
     } else {
       await GoogleSignIn().signOut();
       ToastHelper.showToast(response.message, Colors.white, AppTheme.error);

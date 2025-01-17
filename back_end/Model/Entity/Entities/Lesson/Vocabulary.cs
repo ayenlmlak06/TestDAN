@@ -13,8 +13,15 @@ namespace Entity.Entities.Lesson
         public string? Example { get; set; }
         public string? Note { get; set; }
         public Guid LessonId { get; set; }
-        public virtual required Lesson Lesson { get; set; }
-        public ICollection<VocabularyMedia> VocabularyMedias { get; set; } = new List<VocabularyMedia>();
+        public required Lesson Lesson { get; set; }
+        public ICollection<VocabularyMedia>? VocabularyMedias { get; set; } = new List<VocabularyMedia>();
+
+        public Vocabulary()
+        {
+            Id = Guid.NewGuid();
+            CreatedDate = DateTime.Now;
+            IsDeleted = false;
+        }
     }
 
     public class VocabularyConfiguration : IEntityTypeConfiguration<Vocabulary>
@@ -28,8 +35,8 @@ namespace Entity.Entities.Lesson
             builder.Property(x => x.Meaning).HasColumnType("varchar(255)").IsRequired();
             builder.Property(x => x.Example).HasColumnType("nvarchar(255)").IsRequired();
             builder.Property(x => x.Note).HasColumnType("nvarchar(255)");
-            builder.HasOne(x => x.Lesson).WithMany(x => x.Vocabularies).HasForeignKey(x => x.LessonId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasMany(x => x.VocabularyMedias).WithOne(x => x.Vocabulary).HasForeignKey(x => x.VocabularyId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Lesson).WithMany(x => x.Vocabularies).HasForeignKey(x => x.LessonId);
+            builder.HasMany(x => x.VocabularyMedias).WithOne(x => x.Vocabulary).HasForeignKey(x => x.VocabularyId);
         }
     }
 
